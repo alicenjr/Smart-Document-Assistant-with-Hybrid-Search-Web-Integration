@@ -4,6 +4,12 @@
 
 **Multi-Modal RAG • Hybrid Search • Web-Augmented Intelligence • Agentic Workflows**
 
+## 📸 Screenshot
+
+![Frontend Interface](image.png)
+
+*Modern chat interface with PDF upload and intelligent Q&A capabilities*
+
 ## 🎯 Features
 
 - **PDF Document Ingestion**: Upload and process PDFs with support for:
