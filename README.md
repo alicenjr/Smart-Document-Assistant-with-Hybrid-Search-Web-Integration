@@ -1,317 +1,308 @@
-# Agentic RAG System: Intelligent Document Q&A with Multi-Modal Processing
+<div align="center">
 
-> A comprehensive Retrieval-Augmented Generation (RAG) system built with LangChain that combines document ingestion, vector search, and agentic workflows to provide intelligent question-answering capabilities over PDF documents.
+# 🤖 Agentic RAG System
 
-**Multi-Modal RAG • Hybrid Search • Web-Augmented Intelligence • Agentic Workflows**
+**Intelligent Document Q&A with Multi-Modal Processing**
 
-## 📸 Screenshot
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18+-61dafb.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6+-3178c6.svg)](https://www.typescriptlang.org/)
+
+*A powerful Retrieval-Augmented Generation system that transforms PDFs into intelligent knowledge bases*
+
+[Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [API](#-api-reference)
+
+</div>
+
+---
+
+## 📸 Preview
+
+<div align="center">
 
 ![Frontend Interface](image.png)
 
-*Modern chat interface with PDF upload and intelligent Q&A capabilities*
+*Beautiful, modern chat interface with PDF upload and intelligent Q&A*
 
-## 🎯 Features
+</div>
 
-- **PDF Document Ingestion**: Upload and process PDFs with support for:
-  - Semantic text chunking
-  - Image extraction and captioning (using Gemini Vision)
-  - Table extraction and description
-  - Multi-modal content indexing
+---
 
-- **Hybrid Search**: Combines keyword and semantic (vector) search for optimal retrieval
-- **Agentic RAG Workflow**: Multi-step workflow with query enhancement, retrieval, summarization, and quality rating
-- **Web Search Integration**: Augments document knowledge with real-time web search via Serper API
-- **Conversation Memory**: Maintains context across multiple interactions
-- **Modern Chat UI**: React-based frontend with dark mode support
-- **OpenSearch Backend**: Scalable vector database for document storage
+## ✨ Features
 
-## 📋 Table of Contents
+<div align="center">
 
-- [Architecture](#architecture)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Project Structure](#project-structure)
-- [Development](#development)
+| 🎯 **Core Capabilities** | 🚀 **Advanced Features** |
+|------------------------|--------------------------|
+| 📄 **PDF Processing** | 🔍 **Hybrid Search** (Keyword + Semantic) |
+| 🖼️ **Image Extraction** | 🌐 **Web Search Integration** |
+| 📊 **Table Analysis** | 💬 **Conversation Memory** |
+| 🤖 **Agentic Workflows** | ⚡ **Real-time Responses** |
 
-## 🏗️ Architecture
+</div>
 
-The system consists of three main components:
+### What Makes It Special
 
-1. **Backend (FastAPI)**: Handles PDF ingestion, document processing, and RAG query execution
-2. **Frontend (React/TypeScript)**: Modern chat interface for user interactions
-3. **Infrastructure**: OpenSearch for vector storage, Ollama for embeddings
+- **🎨 Multi-Modal Processing**: Handles text, images, and tables from PDFs
+- **🧠 Smart Chunking**: Semantic understanding of document structure
+- **🔄 Quality Assurance**: Automatic answer rating and feedback loops
+- **🌓 Modern UI**: Beautiful React interface with dark mode
+- **⚡ Fast & Scalable**: OpenSearch backend with vector search
 
-### Workflow Overview
+---
 
-```
-PDF Upload → Partitioning → Chunking → Embedding → OpenSearch Index
-                                                          ↓
-User Query → Query Enhancement → Hybrid Search → Retrieval
-                                                          ↓
-                    Web Search (Serper) ← → Document Retrieval
-                                                          ↓
-                    Summarization → Merging → Quality Rating → Response
-```
+## 🚀 Quick Start
 
-## 📦 Prerequisites
+### Prerequisites
 
-- **Python 3.10+**
-- **Node.js 18+** (for frontend)
-- **Docker & Docker Compose** (for OpenSearch)
-- **Ollama** (running locally on port 11434 with `nomic-embed-text` model)
-- **API Keys**:
-  - Google Gemini API key (for LLM and vision)
-  - Serper API key (optional, for web search)
+Make sure you have these installed:
 
-## 🚀 Installation
+- 🐍 Python 3.10+
+- 📦 Node.js 18+
+- 🐳 Docker & Docker Compose
+- 🤖 Ollama (for embeddings)
 
-### 1. Clone the Repository
+### Installation (5 minutes)
+
+<details>
+<summary><b>1️⃣ Start Infrastructure</b></summary>
 
 ```bash
-git clone <repository-url>
-cd langchain_tools
-```
-
-### 2. Set Up OpenSearch
-
-Start OpenSearch and OpenSearch Dashboards using Docker Compose:
-
-```bash
+# Start OpenSearch
 docker-compose up -d
 ```
 
-This will start:
-- OpenSearch on `http://localhost:9200`
-- OpenSearch Dashboards on `http://localhost:5601`
+✅ OpenSearch: `http://localhost:9200`  
+✅ Dashboards: `http://localhost:5601`
+</details>
 
-### 3. Set Up Ollama
-
-Install and run Ollama, then pull the embedding model:
+<details>
+<summary><b>2️⃣ Setup Ollama</b></summary>
 
 ```bash
-# Install Ollama (if not already installed)
-# Visit https://ollama.ai for installation instructions
-
-# Pull the embedding model
+# Pull embedding model
 ollama pull nomic-embed-text
+
+# Verify it's running
+curl http://localhost:11434/api/tags
 ```
+</details>
 
-Ensure Ollama is running on `http://localhost:11434`
-
-### 4. Install Python Dependencies
+<details>
+<summary><b>3️⃣ Install Backend</b></summary>
 
 ```bash
-# Create virtual environment (recommended)
+# Create virtual environment
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Additional dependencies may be needed:
 pip install unstructured[pdf] langchain-google-genai langgraph opensearch-py python-dotenv
 ```
+</details>
 
-### 5. Install Frontend Dependencies
+<details>
+<summary><b>4️⃣ Install Frontend</b></summary>
 
 ```bash
 cd chatbot-ui
 npm install
 ```
+</details>
 
-## ⚙️ Configuration
+<details>
+<summary><b>5️⃣ Configure Environment</b></summary>
 
-### Environment Variables
-
-Create a `.env` file in the root directory (optional, as some keys are hardcoded in the code):
-
+Create `.env` in root:
 ```env
-# Google Gemini API Key
-GOOGLE_API_KEY=your_gemini_api_key
-
-# Serper API Key (for web search)
-SERPER_API_KEY=your_serper_api_key
-
-# PDF Upload Directory
-PDF_UPLOAD_DIR=uploads
-
-# OpenSearch Index Name
-PDF_INDEX_NAME=pdf_content_index
+GOOGLE_API_KEY=your_gemini_key
+SERPER_API_KEY=your_serper_key
 ```
 
-**⚠️ Security Note**: The codebase currently contains hardcoded API keys. For production use, move all API keys to environment variables or a secure configuration system.
-
-### Frontend Configuration
-
-Create a `.env` file in the `chatbot-ui` directory:
-
+Create `.env` in `chatbot-ui/`:
 ```env
 VITE_API_BASE=http://localhost:8000
 ```
+</details>
 
-## 🎮 Usage
+### 🎮 Run It!
 
-### Start the Backend Server
-
+**Terminal 1 - Backend:**
 ```bash
-# From the root directory
 uvicorn app:app --reload --port 8000
 ```
 
-The API will be available at `http://localhost:8000`
-
-### Start the Frontend
-
+**Terminal 2 - Frontend:**
 ```bash
-# From the chatbot-ui directory
 cd chatbot-ui
 npm run dev
 ```
 
-The frontend will be available at `http://localhost:5173` (or the port shown in the terminal)
+🎉 Open `http://localhost:5173` and start chatting!
 
-### Using the System
+---
 
-1. **Upload a PDF**: Use the upload interface in the chat UI to add documents to the knowledge base
-2. **Ask Questions**: Type your question in the chat interface
-3. **View Responses**: The system will retrieve relevant information from your documents and web search, then provide a consolidated answer
+## 🏗️ How It Works
 
-## 📡 API Endpoints
-
-### Health Check
-
-```http
-GET /health
+```
+┌─────────────┐
+│  PDF Upload │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────────────────────────────┐
+│  Extract → Chunk → Embed → Index   │
+│  (Text, Images, Tables)             │
+└──────┬──────────────────────────────┘
+       │
+       ▼
+┌─────────────┐      ┌──────────────┐
+│  OpenSearch │      │   Ollama     │
+│  (Storage)  │◄─────│ (Embeddings) │
+└──────┬──────┘      └──────────────┘
+       │
+       │ User Query
+       ▼
+┌─────────────────────────────────────┐
+│  Query Enhancement                  │
+│         │                           │
+│         ├─► Hybrid Search ──┐       │
+│         │                   │       │
+│         └─► Web Search ─────┤       │
+│                             ▼       │
+│                    Summarize & Merge│
+│                             │       │
+│                             ▼       │
+│                    Quality Check    │
+│                             │       │
+│                    ┌────────┴──┐   │
+│                    │ Approved?  │   │
+│                    └────┬───────┘   │
+│                         │           │
+│                    ┌────┴────┐     │
+│                    │  Yes    │ No  │
+│                    └────┬────┘     │
+│                         │          │
+│                         ▼          │
+│                    Final Answer    │
+└─────────────────────────────────────┘
 ```
 
-Returns the health status of the service.
+---
 
-### Ingest PDF
+## 📡 API Reference
 
-```http
-POST /ingest
-Content-Type: multipart/form-data
+### Core Endpoints
 
-file: <PDF file>
+#### `POST /ingest`
+Upload and process a PDF file.
+
+```bash
+curl -X POST http://localhost:8000/ingest \
+  -F "file=@document.pdf"
 ```
-
-Uploads and processes a PDF file. The ingestion runs in the background.
 
 **Response:**
 ```json
 {
   "message": "Ingestion started",
   "original_filename": "document.pdf",
-  "stored_filename": "unique_hash_document.pdf",
   "index": "pdf_content_index"
 }
 ```
 
-### Query RAG
+#### `POST /query`
+Ask questions about your documents.
 
-```http
-POST /query
-Content-Type: application/json
-
-{
-  "query": "Your question here",
-  "conversation_id": "optional-conversation-id"
-}
+```bash
+curl -X POST http://localhost:8000/query \
+  -H "Content-Type: application/json" \
+  -d '{"query": "What is this document about?"}'
 ```
-
-Executes the agentic RAG workflow and returns a response.
 
 **Response:**
 ```json
 {
-  "query": "enhanced query",
-  "rag_answer": "retrieved chunks...",
-  "google_answer": "web search results...",
-  "r_summary": "document summary",
-  "g_summary": "web search summary",
-  "r_g_summary": "combined final answer",
+  "r_g_summary": "Comprehensive answer based on documents and web search...",
   "rating": "approved",
-  "conversation_id": "uuid"
+  "conversation_id": "uuid-here"
 }
 ```
 
-### Get Conversation
+#### `GET /health`
+Check service status.
 
-```http
-GET /conversations/{conversation_id}
+```bash
+curl http://localhost:8000/health
 ```
 
-Retrieves the conversation history for a given conversation ID.
+### Conversation Management
 
-### Delete Conversation
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/conversations/{id}` | GET | Get conversation history |
+| `/conversations/{id}` | DELETE | Delete conversation |
 
-```http
-DELETE /conversations/{conversation_id}
-```
-
-Deletes a conversation by its ID.
+---
 
 ## 📁 Project Structure
 
 ```
 langchain_tools/
-├── app.py                 # FastAPI application with endpoints
-├── workflow_2.py          # Agentic RAG workflow implementation
-├── agent.py               # LangChain agent with tools
-├── ingestion.py           # OpenSearch ingestion pipeline
-├── retrieval.py           # Search functions (keyword, semantic, hybrid)
-├── generation.py          # RAG response generation
-├── chunker.py             # PDF chunking and processing
-├── helper.py              # Utility functions (embeddings, OpenSearch client)
-├── requirements.txt       # Python dependencies
-├── docker-compose.yml     # OpenSearch infrastructure
-├── workflow_2.ipynb       # Jupyter notebook version of workflow
-├── display_workflow_2.ipynb  # Workflow visualization
-├── uploads/               # Temporary PDF storage
-└── chatbot-ui/           # React frontend
+├── 🚀 app.py              # FastAPI server & endpoints
+├── 🔄 workflow_2.py       # Agentic RAG workflow
+├── 🤖 agent.py            # LangChain agent with tools
+├── 📥 ingestion.py         # PDF → OpenSearch pipeline
+├── 🔍 retrieval.py        # Search (keyword/semantic/hybrid)
+├── ✨ generation.py       # RAG response generation
+├── 📄 chunker.py          # PDF chunking & processing
+├── 🛠️ helper.py           # Utilities (embeddings, clients)
+├── 📦 requirements.txt    # Python dependencies
+├── 🐳 docker-compose.yml  # OpenSearch setup
+└── 💻 chatbot-ui/        # React frontend
     ├── src/
     │   ├── pages/chat/   # Chat interface
-    │   ├── components/   # UI components
-    │   └── ...
+    │   └── components/   # UI components
     └── package.json
 ```
+
+---
 
 ## 🔧 Key Components
 
 ### PDF Processing Pipeline
 
-1. **Partitioning**: Uses `unstructured` library to extract text, images, and tables
-2. **Image Processing**: Extracts images, generates captions using Gemini Vision
-3. **Table Processing**: Extracts tables and generates descriptions
-4. **Semantic Chunking**: Creates meaningful text chunks based on document structure
-5. **Embedding**: Generates 768-dimensional embeddings using Ollama's `nomic-embed-text`
-6. **Indexing**: Stores all content in OpenSearch with vector search capabilities
+1. **📄 Partitioning** - Extract text, images, tables using `unstructured`
+2. **🖼️ Image Processing** - Generate captions with Gemini Vision
+3. **📊 Table Analysis** - Extract and describe table structures
+4. **🧩 Semantic Chunking** - Create meaningful text chunks
+5. **🔢 Embedding** - Generate 768-d vectors with Ollama
+6. **💾 Indexing** - Store in OpenSearch with vector search
 
 ### Agentic RAG Workflow
 
-The workflow (`workflow_2.py`) implements a multi-step process:
+The system uses a sophisticated multi-step workflow:
 
-1. **Query Enhancement**: Improves user queries for better retrieval
-2. **Parallel Retrieval**: 
-   - Document retrieval from OpenSearch (hybrid search)
-   - Web search via Serper API
-3. **Summarization**: Creates concise summaries of both sources
-4. **Merging**: Combines document and web search summaries
-5. **Quality Rating**: Evaluates answer quality (approved/rejected)
-6. **Feedback Loop**: Re-retrieves if quality is rejected
+1. **Query Enhancement** - Improve queries for better retrieval
+2. **Parallel Retrieval** - Search documents + web simultaneously
+3. **Summarization** - Create concise summaries from both sources
+4. **Merging** - Combine document and web knowledge
+5. **Quality Rating** - Evaluate answer quality
+6. **Feedback Loop** - Re-retrieve if quality is low
 
 ### Search Methods
 
-- **Keyword Search**: Traditional text matching
-- **Semantic Search**: Vector similarity search using embeddings
-- **Hybrid Search**: Combines both methods for optimal results
+- **🔤 Keyword Search** - Traditional text matching
+- **🧠 Semantic Search** - Vector similarity using embeddings
+- **⚡ Hybrid Search** - Best of both worlds
+
+---
 
 ## 🛠️ Development
 
-### Running Tests
+### Testing Components
 
 ```bash
 # Test retrieval
@@ -321,56 +312,71 @@ python retrieval.py
 python generation.py
 
 # Test workflow
-python workflow_2.py "your test query"
+python workflow_2.py "test query"
 ```
-
-### Adding New Features
-
-1. **New Tools**: Add to `agent.py` in the tools list
-2. **New Workflow Nodes**: Add functions to `workflow_2.py` and wire them in the graph
-3. **New Search Methods**: Extend `retrieval.py` with new search functions
 
 ### Frontend Development
 
 ```bash
 cd chatbot-ui
-npm run dev      # Development server
+npm run dev      # Development
 npm run build    # Production build
-npm run lint     # Lint code
+npm run lint     # Code quality
 ```
 
-## 🔒 Security Considerations
+### Adding Features
 
-- **API Keys**: Currently hardcoded in several files. Move to environment variables for production
-- **CORS**: Currently allows all origins. Restrict in production
-- **File Uploads**: Validate file types and sizes
-- **OpenSearch**: Currently runs without security. Enable authentication for production
+- **New Tools**: Add to `agent.py` tools list
+- **Workflow Nodes**: Extend `workflow_2.py` graph
+- **Search Methods**: Add functions to `retrieval.py`
 
-## 📝 Notes
+---
 
-- The system uses multiple Gemini API keys (hardcoded) for different LLM instances
-- OpenSearch index is recreated on each ingestion (existing index is deleted)
-- Conversation memory is stored in-memory (not persistent)
-- PDF files are deleted after ingestion
-- Smalltalk detection is implemented to handle casual greetings
+## ⚠️ Important Notes
+
+> **🔒 Security**: API keys are currently hardcoded. Use environment variables in production.
+
+- OpenSearch index is recreated on each ingestion
+- Conversations stored in-memory (not persistent)
+- PDFs deleted after processing
+- Smalltalk detection for casual greetings
+
+---
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+Contributions welcome! Here's how:
 
-## 📄 License
+1. 🍴 Fork the repo
+2. 🌿 Create a feature branch
+3. ✏️ Make your changes
+4. ✅ Test thoroughly
+5. 📤 Submit a PR
 
-[Add your license information here]
+---
 
-## 🙏 Acknowledgments
+## 🙏 Built With
 
-- LangChain for the RAG framework
-- OpenSearch for vector storage
-- Unstructured for PDF processing
-- Google Gemini for LLM capabilities
-- Serper for web search API
+<div align="center">
 
+| Technology | Purpose |
+|-----------|---------|
+| [LangChain](https://www.langchain.com/) | RAG Framework |
+| [OpenSearch](https://opensearch.org/) | Vector Database |
+| [FastAPI](https://fastapi.tiangolo.com/) | Backend API |
+| [React](https://reactjs.org/) | Frontend UI |
+| [Gemini](https://deepmind.google/technologies/gemini/) | LLM & Vision |
+| [Ollama](https://ollama.ai/) | Embeddings |
+| [Unstructured](https://www.unstructured.io/) | PDF Processing |
+
+</div>
+
+---
+
+<div align="center">
+
+**Made with ❤️ using LangChain and modern AI tools**
+
+⭐ Star this repo if you find it useful!
+
+</div>
