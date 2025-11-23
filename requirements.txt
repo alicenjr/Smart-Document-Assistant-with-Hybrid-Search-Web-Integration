@@ -1,0 +1,5 @@
+google-generativeai
+opensearch-py
+langchain
+fastapi
+uvicorn
